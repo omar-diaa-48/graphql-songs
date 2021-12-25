@@ -20,4 +20,4 @@ LyricSchema.statics.like = function(id) {
     })
 }
 
-mongoose.model('lyric', LyricSchema);
+mongoose.model('lyric', LyricSchema, 'lyrics');
