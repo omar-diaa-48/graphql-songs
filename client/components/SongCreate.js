@@ -1,5 +1,9 @@
 import React, { Component } from "react";
+import { graphql } from "react-apollo";
 import gql from "graphql-tag";
+import {Link, hashHistory} from "react-router";
+import { fetchSongsQuery } from "../queries/queries";
+import { addSongMutation } from "../mutations/mutations";
 
 class SongCreate extends Component {
 
@@ -19,12 +23,17 @@ class SongCreate extends Component {
 
     onSubmit(event){
         event.preventDefault();
-
+        this.props.mutate({
+            variables:{title:this.state.title},
+            refetchQueries:[{ query:fetchSongsQuery }] // to refetch the songs again after adding them
+        })
+        .then(() => hashHistory.push('/'))
     }
 
     render(){
         return (
             <div>
+                <Link to="/">Back</Link>
                 <h3>Create a new song</h3>
                 <form onSubmit={this.onSubmit.bind(this)}>  
                     <label>Song title:</label>
@@ -35,13 +44,4 @@ class SongCreate extends Component {
     }
 }
 
-const mutation = gql`
-    mutation {
-        addSong(title:"Dog call"){
-            id
-            title
-        }
-    }
-`;
-
-export default SongCreate
+export default graphql(addSongMutation)(SongCreate)
