@@ -18,6 +18,7 @@ export const findSongByIdQuery = gql`
             lyrics{
                 id
                 content
+                likes
             }
         }
     }

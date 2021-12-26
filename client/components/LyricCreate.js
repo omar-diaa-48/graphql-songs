@@ -16,7 +16,7 @@ class LyricCreate extends Component {
             variables:{
                 content:this.state.content,
                 songId:this.props.songId
-            },
+            }
         })
         .then(() => this.setState({content:''}))
     }
