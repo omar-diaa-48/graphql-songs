@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { graphql } from "react-apollo";
 import { Link } from "react-router";
-import { fetchSongsQuery } from "../queries/queries";
-import { deleteSongMutation } from "../mutations/mutations";
+import { fetchSongsQuery } from "../queries";
+import { deleteSongMutation } from "../mutations";
 
 class SongList extends Component {
     handleSongDelete(songId){
