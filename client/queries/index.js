@@ -1,21 +1,24 @@
 import gql from "graphql-tag";
 
-export const fetchAllSongsQuery = gql`
+export const findAllSongsQuery = gql`
     {
         songs{
             id
             title
         }
     }
-`
+`;
 
-export const findSongByIdQuery = `
-    query findSongById($id:ID!)
+export const findSongByIdQuery = gql`
+    query FindSongById($id:ID!)
     {
         song(id:$id){
             id
             title
-            lyrics
+            lyrics{
+                id
+                content
+            }
         }
     }
-`
+`;

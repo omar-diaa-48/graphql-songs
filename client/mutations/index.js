@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import gql from "graphql-tag";
 
 export const addSongMutation = gql`
     mutation AddSong($title: String){
@@ -17,3 +17,15 @@ export const deleteSongMutation = gql`
         }
     }
 `;
+
+export const addLyricToSongMutation = gql`
+mutation AddLyricToSong ($content:String, $songId:ID){
+    addLyricToSong(songId:$songId, content:$content){
+      id
+      title
+      lyrics {
+        id
+      }
+    }
+  }
+`

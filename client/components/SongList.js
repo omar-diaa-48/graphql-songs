@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { graphql } from "react-apollo";
 import { Link } from "react-router";
-import { fetchSongsQuery } from "../queries";
+import { findAllSongsQuery } from "../queries";
 import { deleteSongMutation } from "../mutations";
 
 class SongList extends Component {
@@ -13,14 +13,16 @@ class SongList extends Component {
     }
 
     renderSongs() {
-        return this.props.data.songs.map(song => {
+        return this.props.data.songs.map(({id, title}) => {
             return (
-                <li className="collection-item" key={song.id}>
-                    {song.title}
+                <li className="collection-item" key={id}>
+                    <Link to={`/songs/${id}`} >
+                        {title}
+                    </Link>
                     <i 
                         className="material-icons"
                         style={{cursor:'pointer'}}
-                        onClick={() => this.handleSongDelete(song.id)}
+                        onClick={() => this.handleSongDelete(id)}
                         >delete</i>
                 </li>
             )
@@ -50,5 +52,5 @@ class SongList extends Component {
 
 export default
     graphql(deleteSongMutation)(
-    graphql(fetchSongsQuery)(SongList)
+    graphql(findAllSongsQuery)(SongList)
 )
